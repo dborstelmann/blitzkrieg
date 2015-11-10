@@ -1,1 +1,1 @@
-web: gunicorn blitzkrieg-pulse:app
+web: gunicorn test:app --log-file=-
