@@ -10,7 +10,8 @@ cur = conn.cursor()
 INSTAGRAM_CONFIG = {
     'client_id': 'e7896c47f26e463ba097362492257dd7',
     'client_secret': '2db4eb3d197e4feea21505aa2a1dcf50',
-    'redirect_uri': 'https://blitzkrieg-pulse.herokuapp.com/instagram_redirect'
+    'redirect_uri': 'https://blitzkrieg-pulse.herokuapp.com/instagram_redirect',
+    'redirect_uri_local': 'https://blitzkrieg.ngrok.io/instagram_redirect'
 }
 
 @app.route('/')
@@ -80,6 +81,41 @@ def log_out():
 def home():
     if 'user_id' not in session:
         return redirect(url_for('hello'))
+    return render_template('home.html')
+
+@app.route('/instagram_redirect')
+def instagram_redirect():
+    result = requests.post('https://api.instagram.com/oauth/access_token', data={
+        'client_id': INSTAGRAM_CONFIG['client_id'],
+        'client_secret': INSTAGRAM_CONFIG['client_secret'],
+        'grant_type': 'authorization_code',
+        'redirect_uri': INSTAGRAM_CONFIG['redirect_uri_local'],
+        'code': request.args.get('code')
+    })
+    result = result.json()
+    user_info = result['user']
+    import pdb; pdb.set_trace()
+
+
+    insert_instagram_user_query = """
+            INSERT INTO instagram_user (
+                    id,
+                    user_id,
+                    username,
+                    full_name,
+                    profile_picture,
+                    access_token
+                )
+            VALUES (%s, %s, %s, %s, %s, %s) """
+    cur.execute(insert_instagram_user_query, (
+        user_info['id'],
+        session['user_id'],
+        user_info['username'],
+        user_info['full_name'],
+        user_info['profile_picture'],
+        result['access_token']
+    ))
+
     return render_template('home.html')
 
 app.secret_key = 'i\x0b\x8d\r\xc2\xa83\x1dD8\x10_\xb8Q\x87\xce@\xf1k\xd6\x14\xa1\xffP'
