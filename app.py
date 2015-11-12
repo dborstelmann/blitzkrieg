@@ -3,10 +3,8 @@ import requests, psycopg2
 
 app = Flask(__name__)
 
-try:
-    conn = psycopg2.connect("dbname='blitzkrieg' user='postgres' host='localhost' port='5432'");
-except:
-    print "I am unable to connect to the database"
+conn = psycopg2.connect("dbname='blitzkrieg' user='postgres' host='localhost' port='5432'");
+conn.autocommit = True
 cur = conn.cursor()
 
 INSTAGRAM_CONFIG = {
@@ -28,10 +26,9 @@ def log_in():
     password = request.form['password']
 
     cur.execute("""
-            SELECT id FROM users WHERE email = '{0}' AND password = '{1}'
-        """.format(email, password))
+            SELECT id FROM users WHERE email = %s AND password = %s
+        """, (email, password))
     user = cur.fetchone()
-    conn.commit()
 
     if not user:
         return jsonify({'data':'invalid_login'})
@@ -48,10 +45,9 @@ def register():
     password = request.form['password']
 
     cur.execute("""
-            SELECT * FROM users WHERE email = '{0}'
-        """.format(email))
+            SELECT * FROM users WHERE email = %s
+        """, (email,))
     user = cur.fetchall()
-    conn.commit()
 
     if len(user) > 0:
         return jsonify({'data':'user_exists_error'})
@@ -65,13 +61,11 @@ def register():
                 )
             VALUES (%s, %s, %s, %s) """
     cur.execute(insert_user_query, (first_name, last_name, email, password))
-    conn.commit()
 
     cur.execute("""
-            SELECT id FROM users WHERE email = '{0}'
-        """.format(email))
+            SELECT id FROM users WHERE email = %s
+        """, (email,))
     (user_id,) = cur.fetchone()
-    conn.commit()
 
     session['user_id'] = user_id
 
