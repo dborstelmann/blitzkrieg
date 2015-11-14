@@ -145,8 +145,8 @@ def instagram_log_out():
 
     return jsonify({'data':'success'})
 
-app.secret_key = 'i\x0b\x8d\r\xc2\xa83\x1dD8\x10_\xb8Q\x87\xce@\xf1k\xd6\x14\xa1\xffP'
+app.secret_key = 'woot'
 # When debug is true python server will update on file saves instead of needing
 # to re-run server
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
