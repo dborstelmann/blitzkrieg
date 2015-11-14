@@ -1,17 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, redirect, jsonify
 import requests, psycopg2
 
-import sys
-LOGGING = {
-    'handlers': {
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'strm': sys.stdout
-        }
-    }
-}
-
 app = Flask(__name__)
 
 conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
