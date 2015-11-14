@@ -3,7 +3,7 @@ import requests, psycopg2
 
 app = Flask(__name__)
 
-conn = psycopg2.connect("dbname='blitzkrieg' user='postgres' host='localhost' port='5432'");
+conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
 conn.autocommit = True
 cur = conn.cursor()
 
@@ -100,7 +100,7 @@ def instagram_redirect():
         'client_id': INSTAGRAM_CONFIG['client_id'],
         'client_secret': INSTAGRAM_CONFIG['client_secret'],
         'grant_type': 'authorization_code',
-        'redirect_uri': INSTAGRAM_CONFIG['redirect_uri_local'],
+        'redirect_uri': INSTAGRAM_CONFIG['redirect_uri'],
         'code': request.args.get('code')
     })
     result = result.json()
