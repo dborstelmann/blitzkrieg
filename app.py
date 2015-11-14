@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, url_for, redirect, jsonify
-import requests, psycopg2, Jinja2
+import requests, psycopg2
 
 app = Flask(__name__)
 
