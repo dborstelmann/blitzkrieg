@@ -3,9 +3,9 @@ import requests, psycopg2
 
 app = Flask(__name__)
 
-conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
-conn.autocommit = True
-cur = conn.cursor()
+# conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
+# conn.autocommit = True
+# cur = conn.cursor()
 
 INSTAGRAM_CONFIG = {
     'client_id': 'e7896c47f26e463ba097362492257dd7',
@@ -145,8 +145,8 @@ def instagram_log_out():
 
     return jsonify({'data':'success'})
 
-app.secret_key = 'woot'
+app.secret_key = 'i\x0b\x8d\r\xc2\xa83\x1dD8\x10_\xb8Q\x87\xce@\xf1k\xd6\x14\xa1\xffP'
 # When debug is true python server will update on file saves instead of needing
 # to re-run server
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
