@@ -3,9 +3,9 @@ import requests, psycopg2
 
 app = Flask(__name__)
 
-# conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
-# conn.autocommit = True
-# cur = conn.cursor()
+conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
+conn.autocommit = True
+cur = conn.cursor()
 
 INSTAGRAM_CONFIG = {
     'client_id': 'e7896c47f26e463ba097362492257dd7',
