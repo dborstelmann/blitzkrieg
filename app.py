@@ -27,7 +27,7 @@ def log_in():
     password = request.form['password']
 
     cur.execute("""
-            SELECT id FROM users WHERE email = %s AND password = %s
+            SELECT id, has_instagram FROM users WHERE email = %s AND password = %s
         """, (email, password))
     user = cur.fetchone()
 
@@ -35,8 +35,9 @@ def log_in():
         return jsonify({'data':'invalid_login'})
 
     session['user_id'] = user[0]
+    session['has_instagram'] = user[1]
 
-    return jsonify({'data':list(session)})
+    return jsonify({'data':'success'})
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -69,8 +70,9 @@ def register():
     (user_id,) = cur.fetchone()
 
     session['user_id'] = user_id
+    session['has_instagram'] = False
 
-    return jsonify({'data':list(session)})
+    return jsonify({'data':'success'})
 
 @app.route('/log_out')
 def log_out():
@@ -81,6 +83,15 @@ def log_out():
 def home():
     if 'user_id' not in session:
         return redirect(url_for('hello'))
+
+    if session['has_instagram']:
+        cur.execute("""
+                SELECT access_token FROM instagram_user WHERE user_id = %s
+            """, (session['user_id'],))
+        instagram_info = cur.fetchall()[0]
+        if instagram_info[0]:
+            session['instagram_token'] = instagram_info[0]
+
     return render_template('home.html')
 
 @app.route('/instagram_redirect')
@@ -94,29 +105,45 @@ def instagram_redirect():
     })
     result = result.json()
     user_info = result['user']
-    import pdb; pdb.set_trace()
+    session['instagram_token'] = result['access_token']
 
+    if (session['has_instagram']):
+        cur.execute("""
+                UPDATE instagram_user SET access_token = %s WHERE user_id = %s
+            """, (session['instagram_token'], session['user_id']))
+    else:
+        insert_instagram_user_query = """
+                INSERT INTO instagram_user (
+                        id,
+                        user_id,
+                        username,
+                        full_name,
+                        profile_picture,
+                        access_token
+                    )
+                VALUES (%s, %s, %s, %s, %s, %s);
+                UPDATE users SET has_instagram = TRUE WHERE id = %s """
+        cur.execute(insert_instagram_user_query, (
+            user_info['id'],
+            session['user_id'],
+            user_info['username'],
+            user_info['full_name'],
+            user_info['profile_picture'],
+            result['access_token'],
+            session['user_id']
+        ))
+        session['has_instagram'] = True
 
-    insert_instagram_user_query = """
-            INSERT INTO instagram_user (
-                    id,
-                    user_id,
-                    username,
-                    full_name,
-                    profile_picture,
-                    access_token
-                )
-            VALUES (%s, %s, %s, %s, %s, %s) """
-    cur.execute(insert_instagram_user_query, (
-        user_info['id'],
-        session['user_id'],
-        user_info['username'],
-        user_info['full_name'],
-        user_info['profile_picture'],
-        result['access_token']
-    ))
+    return redirect(url_for('home'))
 
-    return render_template('home.html')
+@app.route('/instagram_log_out', methods=['POST'])
+def instagram_log_out():
+    cur.execute("""
+            UPDATE instagram_user SET access_token = '' WHERE user_id = %s
+        """, (session['user_id'],))
+    session.pop('instagram_token', None)
+
+    return jsonify({'data':'success'})
 
 app.secret_key = 'i\x0b\x8d\r\xc2\xa83\x1dD8\x10_\xb8Q\x87\xce@\xf1k\xd6\x14\xa1\xffP'
 # When debug is true python server will update on file saves instead of needing
