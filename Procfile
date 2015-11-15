@@ -1,1 +1,1 @@
-web: gunicorn blitzkrieg:app
+web: gunicorn --log-file=- blitzkrieg:app
