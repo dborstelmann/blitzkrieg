@@ -1,11 +1,6 @@
-from flask import Flask, render_template, request, session, url_for, redirect, jsonify
+from blitzkrieg import blitzkrieg
+from flask import render_template, request, session, url_for, redirect, jsonify
 import requests, psycopg2
-
-app = Flask(__name__)
-
-conn = psycopg2.connect("dbname='blitzkrieg' user='postgres' host='localhost' port='5432'");
-conn.autocommit = True
-cur = conn.cursor()
 
 INSTAGRAM_CONFIG = {
     'client_id': 'e7896c47f26e463ba097362492257dd7',
@@ -14,15 +9,17 @@ INSTAGRAM_CONFIG = {
     'redirect_uri_local': 'https://blitzkrieg.ngrok.io/instagram_redirect'
 }
 
-@app.route('/')
+@blitzkrieg.route('/')
 def hello():
     if 'user_id' in session:
         return redirect(url_for('home'))
     else:
         return render_template('hello.html')
 
-@app.route('/log_in', methods=['POST'])
+@blitzkrieg.route('/log_in', methods=['POST'])
 def log_in():
+    cur = blitzkrieg.db.cursor()
+
     email = request.form['email']
     password = request.form['password']
 
@@ -37,10 +34,14 @@ def log_in():
     session['user_id'] = user[0]
     session['has_instagram'] = user[1]
 
+    cur.close()
+
     return jsonify({'data':'success'})
 
-@app.route('/register', methods=['POST'])
+@blitzkrieg.route('/register', methods=['POST'])
 def register():
+    cur = blitzkrieg.db.cursor()
+
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     email = request.form['email']
@@ -72,15 +73,19 @@ def register():
     session['user_id'] = user_id
     session['has_instagram'] = False
 
+    cur.close()
+
     return jsonify({'data':'success'})
 
-@app.route('/log_out')
+@blitzkrieg.route('/log_out')
 def log_out():
     session.clear()
     return redirect(url_for('hello'))
 
-@app.route('/home')
+@blitzkrieg.route('/home')
 def home():
+    cur = blitzkrieg.db.cursor()
+
     if 'user_id' not in session:
         return redirect(url_for('hello'))
 
@@ -92,10 +97,14 @@ def home():
         if instagram_info[0]:
             session['instagram_token'] = instagram_info[0]
 
+    cur.close()
+
     return render_template('home.html')
 
-@app.route('/instagram_redirect')
+@blitzkrieg.route('/instagram_redirect')
 def instagram_redirect():
+    cur = blitzkrieg.db.cursor()
+
     result = requests.post('https://api.instagram.com/oauth/access_token', data={
         'client_id': INSTAGRAM_CONFIG['client_id'],
         'client_secret': INSTAGRAM_CONFIG['client_secret'],
@@ -107,7 +116,7 @@ def instagram_redirect():
     user_info = result['user']
     session['instagram_token'] = result['access_token']
 
-    if (session['has_instagram']):
+    if session['has_instagram']:
         cur.execute("""
                 UPDATE instagram_user SET access_token = %s WHERE user_id = %s
             """, (session['instagram_token'], session['user_id']))
@@ -134,19 +143,19 @@ def instagram_redirect():
         ))
         session['has_instagram'] = True
 
+    cur.close()
+
     return redirect(url_for('home'))
 
-@app.route('/instagram_log_out', methods=['POST'])
+@blitzkrieg.route('/instagram_log_out', methods=['POST'])
 def instagram_log_out():
+    cur = blitzkrieg.db.cursor()
+
     cur.execute("""
             UPDATE instagram_user SET access_token = '' WHERE user_id = %s
         """, (session['user_id'],))
     session.pop('instagram_token', None)
 
-    return jsonify({'data':'success'})
+    cur.close()
 
-app.secret_key = 'i\x0b\x8d\r\xc2\xa83\x1dD8\x10_\xb8Q\x87\xce@\xf1k\xd6\x14\xa1\xffP'
-# When debug is true python server will update on file saves instead of needing
-# to re-run server
-if __name__ == '__main__':
-    app.run(debug=True)
+    return jsonify({'data':'success'})

@@ -1,0 +1,68 @@
+<!doctype html>
+<script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="static/js/underscore.js"></script>
+<script type="text/javascript" src="static/js/backbone-min.js"></script>
+<script type="text/javascript" src="static/js/materialize.min.js"></script>
+<link type="text/css" rel="stylesheet" href="static/css/materialize.min.css">
+<link type="text/css" rel="stylesheet/less" href="static/less/styles.less"/>
+<script src="static/js/less.min.js" type="text/javascript"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<title>Blitzkrieg</title>
+
+<script id="home-template" type="text/template">
+    <div class="container">
+        <div class="section log-in-section">
+            <div class="row">
+                <div class="col s8 offset-s2">
+                    <div class="row">
+                        <div class="col s9 branding">
+                            <h4>Welcome to Blitzkrieg</h4>
+                        </div>
+                        <div class="col s3 log-out">
+                            <button id="log-out-button" class="btn waves-effect waves-light">Log Out
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                        <div class="col s4">
+                            <a id="facebook-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
+                                Log In With Facebook
+                            </a>
+                        </div>
+                        <div class="col s4">
+                            <a id="twitter-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
+                                Log In With Twitter
+                            </a>
+                        </div>
+                        <div class="col s4">
+                            {% if session.instagram_token %}
+                            <a id="instagram-log-out" class="btn custom-buttons tall-buttons red darken-2">
+                                Log Out of Instagram
+                            </a>
+                            {% else %}
+                            <a href="https://instagram.com/oauth/authorize/?client_id=e7896c47f26e463ba097362492257dd7&redirect_uri=https://blitzkrieg.ngrok.io/instagram_redirect&response_type=code" id="instagram-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
+                                Log In With Instagram
+                            </a>
+                            {% endif %}
+                        </div>
+                        {% if session.instagram_token %}
+                        <div class="col s3 offset-s9" style="margin-top: 20px;">
+                            <button id="get-instagram-feed" class="btn waves-effect waves-light">Instagram Feed</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<body>
+    <div id="home">
+    </div>
+</body>
+
+<!-- Backbone Views File -->
+<script src="static/views/home_view.js" type="text/javascript"></script>
+
+<html>
