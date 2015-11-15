@@ -13,7 +13,8 @@ var HomeView = Backbone.View.extend({
 
     events: {
         'click #log-out-button': 'logOut',
-        'click #instagram-log-out': 'logOutInstagram'
+        'click #instagram-log-out': 'logOutInstagram',
+        'click #get-instagram-feed': 'getInstagramFeed'
     },
 
     logOut: function () {
@@ -31,6 +32,15 @@ var HomeView = Backbone.View.extend({
             url: 'instagram_log_out',
             success: function () {
                 window.location.reload();
+            }
+        });
+    },
+
+    getInstagramFeed: function () {
+        $.ajax({
+            type: 'GET',
+            url: 'get_instagram_feed',
+            success: function () {
             }
         });
     }
