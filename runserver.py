@@ -1,2 +1,3 @@
 from blitzkrieg import blitzkrieg
-blitzkrieg.run(debug=True)
+if __name__ == '__main__':
+    blitzkrieg.run(debug=True)
