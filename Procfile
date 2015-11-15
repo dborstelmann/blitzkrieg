@@ -1,1 +1,1 @@
-web: gunicorn --log-file=- runserver:app
+web: gunicorn --log-file=- --pythonpath blitzkrieg blitzkrieg:blitzkrieg
