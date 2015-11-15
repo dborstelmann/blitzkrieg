@@ -1,0 +1,1 @@
+from blitzkrieg import blitzkrieg
