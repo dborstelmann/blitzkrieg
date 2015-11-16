@@ -9,9 +9,12 @@ def get_instagram_feed():
 
     data_feed = []
     final_feed = recursive_results(data_feed)
-    import pdb; pdb.set_trace()
 
-    print(len(final_feed))
+    # when doing this change timedelta to days=1
+    # print(len(final_feed))
+    # cur.executemany("""INSERT INTO single_day_instagram (created_datetime) VALUES (%s)""", final_feed)
+    # print('done')
+
     cur.close()
 
     return jsonify({'data':'success'})
@@ -30,17 +33,14 @@ def recursive_results(data_feed, next_url=None):
 
     for point in result['data']:
         created_date = datetime.datetime.fromtimestamp(int(point['created_time']))
-        if created_date < datetime.datetime.now()-datetime.timedelta(days=1):
+        if created_date < datetime.datetime.now()-datetime.timedelta(minutes=10):
             break_check = True
             break
         else:
-            data_feed.append(point)
+            data_feed.append((str(created_date),))
 
     if break_check:
-        import pdb; pdb.set_trace()
-        
         return data_feed
     else:
-        print('trying again')
         next_url = result['pagination']['next_url']
-        recursive_results(data_feed, next_url)
+        return recursive_results(data_feed, next_url)
