@@ -18,3 +18,7 @@ CREATE TABLE instagram_user (
     "profile_picture" text,
     "access_token" text NOT NULL
 );
+
+CREATE TABLE single_day_instagram (
+    "created_datetime" text PRIMARY KEY
+)
