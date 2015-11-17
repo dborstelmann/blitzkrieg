@@ -14,7 +14,8 @@ var HomeView = Backbone.View.extend({
     events: {
         'click #log-out-button': 'logOut',
         'click #instagram-log-out': 'logOutInstagram',
-        'click #get-instagram-feed': 'getInstagramFeed'
+        'click #get-instagram-feed': 'getInstagramFeed',
+        'click #test-android-button': 'testAndroid'
     },
 
     logOut: function () {
@@ -43,6 +44,11 @@ var HomeView = Backbone.View.extend({
             success: function () {
             }
         });
+    },
+
+    testAndroid: function () {
+        Materialize.toast('TESTING', 3000);
+        Android.showToast('TESTTTTTTTT');
     }
 
 });
