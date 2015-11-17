@@ -47,7 +47,7 @@ var HomeView = Backbone.View.extend({
     },
 
     testAndroid: function () {
-        Materialize.toast('TESTING', 3000);
+        $('#test-android-button').css({'background-color': 'red'});
         Android.showToast('TESTTTTTTTT');
     }
 
