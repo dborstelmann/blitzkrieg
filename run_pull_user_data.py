@@ -53,7 +53,7 @@ def recursive_results(data_feed, user_id, access_token, next_url=None):
             break_check = True
             break
         else:
-            data_feed.append((str(created_date - datetime.timedelta(hours=6) + datetime.timedelta(minutes=10)), str(user_id)))
+            data_feed.append((str(created_date + datetime.timedelta(minutes=10)), str(user_id)))
 
     if break_check:
         return data_feed

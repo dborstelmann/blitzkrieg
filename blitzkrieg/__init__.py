@@ -8,6 +8,7 @@ from routes import ping_views
 from routes import static_website_views
 
 conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
+#conn = psycopg2.connect("dbname='blitzkrieg' user='postgres' host='localhost' port='5432'");
 conn.autocommit = True
 
 blitzkrieg.db = conn
