@@ -4,7 +4,6 @@ import requests, psycopg2
 blitzkrieg = Flask(__name__)
 
 from routes import login_views
-from routes import feed_views
 from routes import static_website_views
 
 conn = psycopg2.connect("dbname='dep0rlstv76jac' password='XEwbTwn0tDJ_tbDRh8qyLMB30y' user='ficmnhyayqhftm' host='ec2-107-21-219-235.compute-1.amazonaws.com' port='5432'");
