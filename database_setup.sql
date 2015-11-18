@@ -24,5 +24,7 @@ CREATE TABLE single_day_instagram (
 )
 
 CREATE TABLE feed_data (
-    "created_datetime" text PRIMARY KEY
+    "id" serial PRIMARY KEY,
+    "created_datetime" text NOT NULL,
+    "user_id" serial NOT NULL
 )
