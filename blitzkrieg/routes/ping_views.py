@@ -16,9 +16,11 @@ def ping_user_data():
             FROM feed_data
             WHERE
                 user_id = %s
-                AND created_datetime > CURRENT_TIMESTAMP
-                AND created_datetime < CURRENT_TIMESTAMP + (10 * interval '1 minute')
+                AND created_datetime::timestamp > CURRENT_TIMESTAMP
+                AND created_datetime::timestamp < CURRENT_TIMESTAMP + (.25 * interval '1 minute')
         """, (session['user_id'],))
     timestamps = cur.fetchall()
 
     cur.close()
+
+    return jsonify(timestamps)
