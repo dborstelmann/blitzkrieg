@@ -38,12 +38,12 @@ var HomeView = Backbone.View.extend({
     },
 
     getInstagramFeed: function () {
-        $.ajax({
-            type: 'GET',
-            url: 'get_instagram_feed',
-            success: function () {
-            }
-        });
+        // $.ajax({
+        //     type: 'GET',
+        //     url: 'get_instagram_feed',
+        //     success: function () {
+        //     }
+        // });
     },
 
     testAndroid: function () {
