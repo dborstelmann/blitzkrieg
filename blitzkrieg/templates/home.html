@@ -14,27 +14,22 @@
     <div class="container">
         <div class="section log-in-section">
             <div class="row">
-                <div class="col s8 offset-s2">
+                <div class="col s12 l8 offset-l2">
                     <div class="row">
-                        <div class="col s9 branding">
+                        <div class="col s12 l9 branding">
                             <h4>Welcome to Blitzkrieg</h4>
                         </div>
-                        <div class="col s3 log-out">
+                        <div class="col s12 l3 log-out top-spread">
                             <button id="log-out-button" class="btn waves-effect waves-light">Log Out
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
-                        <div class="col s4">
-                            <a id="test-android-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
-                                Test Android Connection
-                            </a>
-                        </div>
-                        <div class="col s4">
+                        <div class="col s12 l6 top-spread">
                             <a id="twitter-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
                                 Log In With Twitter
                             </a>
                         </div>
-                        <div class="col s4">
+                        <div class="col s12 l6 top-spread">
                             {% if session.instagram_token %}
                             <a id="instagram-log-out" class="btn custom-buttons tall-buttons red darken-2">
                                 Log Out of Instagram
@@ -45,11 +40,11 @@
                             </a>
                             {% endif %}
                         </div>
-                        {% if session.instagram_token %}
-                        <div class="col s3 offset-s9" style="margin-top: 20px;">
-                            <button id="get-instagram-feed" class="btn waves-effect waves-light">Instagram Feed</button>
+                        <div class="col s12 l6 top-spread">
+                            <a id="start-beacon-button" class="btn waves-effect waves-light custom-buttons tall-buttons start-beacon">
+                                Start Beacon
+                            </a>
                         </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>

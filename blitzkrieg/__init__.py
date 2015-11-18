@@ -4,6 +4,7 @@ import requests, psycopg2
 blitzkrieg = Flask(__name__)
 
 from routes import login_views
+from routes import ping_views
 from routes import static_website_views
 
 conn = psycopg2.connect("dbname='blitzkrieg' user='postgres' host='localhost' port='5432'");
