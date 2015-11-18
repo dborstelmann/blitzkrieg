@@ -22,3 +22,7 @@ CREATE TABLE instagram_user (
 CREATE TABLE single_day_instagram (
     "created_datetime" text PRIMARY KEY
 )
+
+CREATE TABLE feed_data (
+    "created_datetime" text PRIMARY KEY
+)
