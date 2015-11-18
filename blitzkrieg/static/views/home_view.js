@@ -67,7 +67,11 @@ var HomeView = Backbone.View.extend({
         $.ajax({
             url: 'ping_user_data',
             success: function (data) {
-                debugger;
+                _.each(data, function (ping) {
+                    var nowDate = new Date(),
+                        pingDate = new Date(ping);
+                    setTimeout(function(){ alert("Hello"); }, pingDate - nowDate);
+                });
             }
         });
     }
