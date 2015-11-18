@@ -49,7 +49,7 @@ def recursive_results(data_feed, user_id, access_token, next_url=None):
 
     for point in result['data']:
         created_date = datetime.datetime.fromtimestamp(int(point['created_time']))
-        if created_date < datetime.datetime.now() - datetime.timedelta(minutes=60):
+        if created_date < datetime.datetime.now() - datetime.timedelta(minutes=10):
             break_check = True
             break
         else:
