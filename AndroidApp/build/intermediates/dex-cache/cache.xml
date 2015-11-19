@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/pre-dexed/debug/classes-3e7ea806afbd6f7eb39f263a93feb47007806c29.jar" />
+        <dex dex="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/pre-dexed/debug/classes-9650880ed981ac5d4463a1e1de083b4e2162676a.jar" />
     </item>
     <item
-        jar="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/pre-dexed/debug/classes-83c40aa1fc9f89efee91141cc2c5fde207dd43fe.jar" />
+    </item>
+    <item
+        jar="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1890091d03849700414c0d95abbc3146ff6618fa.jar" />
+        <dex dex="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-46097d088cf896a4ff9d4ba4aa365a2dae0bf25e.jar" />
     </item>
     <item
         jar="/Users/alexanderbolinsky/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-ead743e14fdf64f5baff2f3e51525e653b2ad0b8.jar" />
-    </item>
-    <item
-        jar="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/alexanderbolinsky/Software Dev/BLE_mbed_Remote/app/build/intermediates/pre-dexed/debug/classes-5a60000b4125e81807855faf52c7b99b0abdc0b5.jar" />
+        <dex dex="/Users/alexanderbolinsky/Software Dev/blitzkrieg/AndroidApp/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-ead743e14fdf64f5baff2f3e51525e653b2ad0b8.jar" />
     </item>
 
 </items>

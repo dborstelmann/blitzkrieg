@@ -175,6 +175,7 @@ public class DeviceListActivity extends Activity {
         }
 
         devRssiValues.put(device.getAddress(), rssi);
+
         if (!deviceFound) {
             deviceList.add(device);
             mEmptyList.setVisibility(View.GONE);
