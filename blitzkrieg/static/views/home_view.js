@@ -58,11 +58,10 @@ var HomeView = Backbone.View.extend({
         $this.removeClass('stop-beacon');
         $this.removeClass('red darken-2');
         $this.addClass('start-beacon');
-        $this.text('Start Beacon Beacon');
+        $this.text('Start Beacon');
     },
 
     beacon: function () {
-        var _this = this;
 
         $.ajax({
             url: 'ping_user_data',
@@ -70,7 +69,10 @@ var HomeView = Backbone.View.extend({
                 _.each(data, function (ping) {
                     var nowDate = new Date(),
                         pingDate = new Date(ping);
-                    setTimeout(function(){ alert("Hello"); }, pingDate - nowDate);
+
+                    setTimeout( function () {
+                        Android.notifyMe();
+                    }, pingDate - nowDate);
                 });
             }
         });
