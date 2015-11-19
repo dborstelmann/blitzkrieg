@@ -40,10 +40,6 @@ var HomeView = Backbone.View.extend({
     startBeacon: function (e) {
         var $this = $(e.target);
 
-        if (typeof Android !== 'undefined') {
-            Android.startBeacon();
-        }
-
         $this.removeClass('start-beacon');
         $this.addClass('red darken-2');
         $this.addClass('stop-beacon');
