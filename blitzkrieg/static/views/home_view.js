@@ -64,7 +64,6 @@ var HomeView = Backbone.View.extend({
     },
 
     beacon: function () {
-
         $.ajax({
             url: 'ping_user_data',
             success: function (data) {
@@ -74,6 +73,10 @@ var HomeView = Backbone.View.extend({
 
                     setTimeout( function () {
                         Android.notifyMe();
+                        $('#testing-beacon').toggleClass('black');
+                        setTimeout( function () {
+                            $('#testing-beacon').toggleClass('black');
+                        }, 500);
                     }, pingDate - nowDate);
                 });
             }
