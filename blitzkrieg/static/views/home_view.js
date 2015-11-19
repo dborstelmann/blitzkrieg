@@ -40,7 +40,7 @@ var HomeView = Backbone.View.extend({
     startBeacon: function (e) {
         var $this = $(e.target);
 
-        if (Android) {
+        if (typeof Android) {
             Android.startBeacon();
         }
 
@@ -74,7 +74,7 @@ var HomeView = Backbone.View.extend({
                         pingDate = new Date(ping);
 
                     setTimeout( function () {
-                        if (Android) {
+                        if (typeof Android) {
                             Android.notifyMe();
                         }
                         $('#testing-beacon').toggleClass('black');
