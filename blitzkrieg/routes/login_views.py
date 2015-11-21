@@ -1,5 +1,6 @@
 from blitzkrieg import blitzkrieg
 from flask import render_template, request, session, url_for, redirect, jsonify
+from flask_dance.contrib.twitter import twitter
 import requests, psycopg2
 
 INSTAGRAM_CONFIG = {
@@ -159,3 +160,47 @@ def instagram_log_out():
     cur.close()
 
     return jsonify({'data':'success'})
+
+@blitzkrieg.route('/twitter_login', methods=['POST'])
+def twitter_login():
+    cur = blitzkrieg.db.cursor()
+
+    if not twitter.authorized:
+        return redirect(url_for("twitter.login"))
+    resp = twitter.get("account/settings.json")
+    assert resp.ok
+    cur.close()
+
+    return "You are @{screen_name} on Twitter".format(screen_name=resp.json()["screen_name"])
+
+   # session['instagram_token'] = result['access_token']
+   #
+   # if session['has_instagram']:
+   #     cur.execute("""
+   #              UPDATE instagram_user SET access_token = %s WHERE user_id = %s
+   #          """, (session['instagram_token'], session['user_id']))
+   #  else:
+   #      insert_instagram_user_query = """
+   #              INSERT INTO instagram_user (
+   #                      id,
+   #                      user_id,
+   #                      username,
+   #                      full_name,
+   #                      profile_picture,
+   #                      access_token
+   #                  )
+   #              VALUES (%s, %s, %s, %s, %s, %s);
+   #              UPDATE users SET has_instagram = TRUE WHERE id = %s """
+   #      cur.execute(insert_instagram_user_query, (
+   #          user_info['id'],
+   #          session['user_id'],
+   #          user_info['username'],
+   #          user_info['full_name'],
+   #          user_info['profile_picture'],
+   #          result['access_token'],
+   #          session['user_id']
+   #      ))
+   #      session['has_instagram'] = True
+
+
+    #return redirect(url_for('home'))
