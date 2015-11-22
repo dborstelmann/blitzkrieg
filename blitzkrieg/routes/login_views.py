@@ -25,7 +25,7 @@ def log_in():
     password = request.form['password']
 
     cur.execute("""
-            SELECT id, has_instagram FROM users WHERE email = %s AND password = %s
+            SELECT id, has_instagram, has_twitter FROM users WHERE email = %s AND password = %s
         """, (email, password))
     user = cur.fetchone()
 
@@ -34,6 +34,7 @@ def log_in():
 
     session['user_id'] = user[0]
     session['has_instagram'] = user[1]
+    session['has_twitter'] = user[2]
 
     cur.close()
 
@@ -73,6 +74,7 @@ def register():
 
     session['user_id'] = user_id
     session['has_instagram'] = False
+    session['has_twitter'] = False
 
     cur.close()
 
@@ -97,6 +99,15 @@ def home():
         instagram_info = cur.fetchall()[0]
         if instagram_info[0]:
             session['instagram_token'] = instagram_info[0]
+
+    if session['has_twitter']:
+        cur.execute("""
+                SELECT access_token, access_token_secret FROM twitter_user WHERE user_id = %s
+            """, (session['user_id'],))
+        twitter_info = cur.fetchall()[0]
+        if twitter_info[0]:
+            session['twitter_token'] = twitter_info[0]
+            session['twitter_token_secret'] = twitter_info[1]
 
     cur.close()
 
@@ -161,46 +172,61 @@ def instagram_log_out():
 
     return jsonify({'data':'success'})
 
-@blitzkrieg.route('/twitter_login', methods=['POST'])
+@blitzkrieg.route('/twitter_login')
 def twitter_login():
     cur = blitzkrieg.db.cursor()
 
     if not twitter.authorized:
         return redirect(url_for("twitter.login"))
-    resp = twitter.get("account/settings.json")
-    assert resp.ok
+    else:
+        return redirect(url_for("twitter_redirect"))
+
+@blitzkrieg.route('/twitter_redirect')
+def twitter_redirect():
+    cur = blitzkrieg.db.cursor()
+
+    session['twitter_token'] = session['twitter_oauth_token']['oauth_token']
+    session['twitter_token_secret'] = session['twitter_oauth_token']['oauth_token_secret']
+
+    if session['has_twitter']:
+        cur.execute("""
+                UPDATE twitter_user SET access_token = %s, access_token_secret = %s WHERE user_id = %s
+            """, (session['twitter_token'], session['oauth_token_secret'], session['user_id']))
+    else:
+        insert_twitter_user_query = """
+                INSERT INTO twitter_user (
+                        id,
+                        user_id,
+                        screen_name,
+                        access_token,
+                        access_token_secret
+                    )
+                VALUES (%s, %s, %s, %s, %s);
+                UPDATE users SET has_twitter = TRUE WHERE id = %s """
+        cur.execute(insert_twitter_user_query, (
+            session['twitter_oauth_token']['user_id'],
+            session['user_id'],
+            session['twitter_oauth_token']['screen_name'],
+            session['twitter_oauth_token']['oauth_token'],
+            session['twitter_oauth_token']['oauth_token_secret'],
+            session['user_id']
+        ))
+        session['has_twitter'] = True
     cur.close()
 
-    return "You are @{screen_name} on Twitter".format(screen_name=resp.json()["screen_name"])
 
-   # session['instagram_token'] = result['access_token']
-   #
-   # if session['has_instagram']:
-   #     cur.execute("""
-   #              UPDATE instagram_user SET access_token = %s WHERE user_id = %s
-   #          """, (session['instagram_token'], session['user_id']))
-   #  else:
-   #      insert_instagram_user_query = """
-   #              INSERT INTO instagram_user (
-   #                      id,
-   #                      user_id,
-   #                      username,
-   #                      full_name,
-   #                      profile_picture,
-   #                      access_token
-   #                  )
-   #              VALUES (%s, %s, %s, %s, %s, %s);
-   #              UPDATE users SET has_instagram = TRUE WHERE id = %s """
-   #      cur.execute(insert_instagram_user_query, (
-   #          user_info['id'],
-   #          session['user_id'],
-   #          user_info['username'],
-   #          user_info['full_name'],
-   #          user_info['profile_picture'],
-   #          result['access_token'],
-   #          session['user_id']
-   #      ))
-   #      session['has_instagram'] = True
+    return redirect(url_for('home'))
 
+@blitzkrieg.route('/twitter_log_out', methods=['POST'])
+def twitter_log_out():
+    cur = blitzkrieg.db.cursor()
 
-    #return redirect(url_for('home'))
+    cur.execute("""
+            UPDATE twitter_user SET access_token = '', access_token_secret = '' WHERE user_id = %s
+        """, (session['user_id'],))
+    session.pop('twitter_token', None)
+    session.pop('twitter_token_secret', None)
+
+    cur.close()
+
+    return jsonify({'data':'success'})
