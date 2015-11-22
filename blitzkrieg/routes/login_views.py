@@ -191,7 +191,7 @@ def twitter_redirect():
     if session['has_twitter']:
         cur.execute("""
                 UPDATE twitter_user SET access_token = %s, access_token_secret = %s WHERE user_id = %s
-            """, (session['twitter_token'], session['oauth_token_secret'], session['user_id']))
+            """, (session['twitter_token'], session['twitter_token_secret'], session['user_id']))
     else:
         insert_twitter_user_query = """
                 INSERT INTO twitter_user (
