@@ -25,9 +25,15 @@
                             </button>
                         </div>
                         <div class="col s12 l6 top-spread">
+                            {% if session.twitter_token %}
+                            <a id="twitter-log-out" class="btn custom-buttons tall-buttons red darken-2">
+                                Log Out of Twitter
+                            </a>
+                            {% else %}
                             <a id="twitter-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
                                 Log In With Twitter
                             </a>
+                            {% endif %}
                         </div>
                         <div class="col s12 l6 top-spread">
                             {% if session.instagram_token %}
