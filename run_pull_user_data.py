@@ -63,7 +63,7 @@ def twitter_recursion(t, data_feed, user_id, max_id=None):
     for tweet in home_tweets:
         print(tweet['id'])
         created_date = datetime.datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y') - datetime.timedelta(hours=6)
-        if created_date < datetime.datetime.now() - datetime.timedelta(minutes=1000):
+        if created_date < datetime.datetime.now() - datetime.timedelta(minutes=10):
             break_check = True
             break
         else:
