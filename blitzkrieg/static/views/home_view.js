@@ -15,12 +15,15 @@ var HomeView = Backbone.View.extend({
         this.$el.html(this.template());
 
         var $insta = this.$el.find('.instagram-div'),
-            pos = $(window).height() - $insta.position().top + $insta.outerHeight() - 184;
+            pos = $(window).height() - $insta.position().top + $insta.outerHeight() - 224;
 
         this.$el.find('#start-beacon-button').css({'margin-top': pos});
         this.$el.find('.test-outer').css({width: this.$el.find('.outer-div').width() - 40});
         this.$el.find('.back-div').css({
             'pointer-events': 'none',
+            opacity: 0
+        });
+        this.$el.find('.test-outer').css({
             opacity: 0
         });
 
@@ -95,6 +98,9 @@ var HomeView = Backbone.View.extend({
         this.$el.find('.back-div').css({
             'pointer-events': 'all'
         });
+        this.$el.find('.test-outer').animate({
+            opacity: 1
+        }, 500);
 
         this.beacon();
         this.beaconInterval = setInterval(this.beacon, 15000);
@@ -121,12 +127,14 @@ var HomeView = Backbone.View.extend({
             opacity: 0
         }, 500);
         this.$el.find('.back-div').animate({
-            'pointer-events': 'all',
             opacity: 1
         }, 500);
         this.$el.find('.back-div').css({
             'pointer-events': 'all'
         });
+        this.$el.find('.test-outer').animate({
+            opacity: 1
+        }, 500);
 
         this.randomBeacon();
         this.randomBeaconInterval = setInterval(this.randomBeacon, 15000);
@@ -161,6 +169,10 @@ var HomeView = Backbone.View.extend({
         this.$el.find('.back-div').css({
             'pointer-events': 'none'
         });
+        this.$el.find('.test-outer').animate({
+            opacity: 0
+        }, 500);
+
 
         this.pulse = false;
         this.rando = false;
@@ -200,24 +212,6 @@ var HomeView = Backbone.View.extend({
     },
 
     randomBeacon: function () {
-        setTimeout( function () {
-            if (typeof Android !== 'undefined') {
-                Android.notifyMe();
-            }
-            $('#testing-beacon').toggleClass('black');
-            setTimeout( function () {
-                $('#testing-beacon').toggleClass('black');
-            }, 500);
-        }, Math.random() * 5000);
-        setTimeout( function () {
-            if (typeof Android !== 'undefined') {
-                Android.notifyMe();
-            }
-            $('#testing-beacon').toggleClass('black');
-            setTimeout( function () {
-                $('#testing-beacon').toggleClass('black');
-            }, 500);
-        }, Math.random() * 10000);
         setTimeout( function () {
             if (typeof Android !== 'undefined') {
                 Android.notifyMe();
