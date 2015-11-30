@@ -18,12 +18,13 @@ var HomeView = Backbone.View.extend({
             pos = $(window).height() - $insta.position().top + $insta.outerHeight() - 224;
 
         this.$el.find('#start-beacon-button').css({'margin-top': pos});
-        this.$el.find('.test-outer').css({width: this.$el.find('.outer-div').width() - 40});
-        this.$el.find('.back-div').css({
-            'pointer-events': 'none',
+        this.$el.find('#testing-beacon').css({
+            width: this.$el.find('.outer-div').width() - 40,
+            height: this.$el.find('.outer-div').width() - 40,
             opacity: 0
         });
-        this.$el.find('.test-outer').css({
+        this.$el.find('.back-div').css({
+            'pointer-events': 'none',
             opacity: 0
         });
 
@@ -98,9 +99,6 @@ var HomeView = Backbone.View.extend({
         this.$el.find('.back-div').css({
             'pointer-events': 'all'
         });
-        this.$el.find('.test-outer').animate({
-            opacity: 1
-        }, 500);
 
         this.beacon();
         this.beaconInterval = setInterval(this.beacon, 15000);
@@ -132,9 +130,6 @@ var HomeView = Backbone.View.extend({
         this.$el.find('.back-div').css({
             'pointer-events': 'all'
         });
-        this.$el.find('.test-outer').animate({
-            opacity: 1
-        }, 500);
 
         this.randomBeacon();
         this.randomBeaconInterval = setInterval(this.randomBeacon, 15000);
@@ -169,10 +164,6 @@ var HomeView = Backbone.View.extend({
         this.$el.find('.back-div').css({
             'pointer-events': 'none'
         });
-        this.$el.find('.test-outer').animate({
-            opacity: 0
-        }, 500);
-
 
         this.pulse = false;
         this.rando = false;
@@ -183,9 +174,9 @@ var HomeView = Backbone.View.extend({
         if (typeof Android !== 'undefined') {
             Android.notifyMe();
         }
-        $('#testing-beacon').toggleClass('black');
+        $('#testing-beacon').animate({opacity: 1}, 500);
         setTimeout( function () {
-            $('#testing-beacon').toggleClass('black');
+            $('#testing-beacon').animate({opacity: 0}, 500);
         }, 500);
     },
 
@@ -201,9 +192,9 @@ var HomeView = Backbone.View.extend({
                         if (typeof Android !== 'undefined') {
                             Android.notifyMe();
                         }
-                        $('#testing-beacon').toggleClass('black');
+                        $('#testing-beacon').animate({opacity: 1}, 500);
                         setTimeout( function () {
-                            $('#testing-beacon').toggleClass('black');
+                            $('#testing-beacon').animate({opacity: 0}, 500);
                         }, 500);
                     }, pingDate - nowDate);
                 });
@@ -216,27 +207,27 @@ var HomeView = Backbone.View.extend({
             if (typeof Android !== 'undefined') {
                 Android.notifyMe();
             }
-            $('#testing-beacon').toggleClass('black');
+            $('#testing-beacon').animate({opacity: 1}, 500);
             setTimeout( function () {
-                $('#testing-beacon').toggleClass('black');
+                $('#testing-beacon').animate({opacity: 0}, 500);
             }, 500);
         }, Math.random() * 15000);
         setTimeout( function () {
             if (typeof Android !== 'undefined') {
                 Android.notifyMe();
             }
-            $('#testing-beacon').toggleClass('black');
+            $('#testing-beacon').animate({opacity: 1}, 500);
             setTimeout( function () {
-                $('#testing-beacon').toggleClass('black');
+                $('#testing-beacon').animate({opacity: 0}, 500);
             }, 500);
         }, Math.random() * 15000);
         setTimeout( function () {
             if (typeof Android !== 'undefined') {
                 Android.notifyMe();
             }
-            $('#testing-beacon').toggleClass('black');
+            $('#testing-beacon').animate({opacity: 1}, 500);
             setTimeout( function () {
-                $('#testing-beacon').toggleClass('black');
+                $('#testing-beacon').animate({opacity: 0}, 500);
             }, 500);
         }, Math.random() * 15000);
     }
