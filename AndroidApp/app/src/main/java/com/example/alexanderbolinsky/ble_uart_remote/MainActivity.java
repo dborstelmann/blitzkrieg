@@ -27,9 +27,9 @@ import java.io.UnsupportedEncodingException;
 public class MainActivity extends Activity {
 
     private static final int REQUEST_SELECT_DEVICE = 1;
-    private static final int REQUEST_ENABLE_BT = 2;
     private static final int UART_PROFILE_CONNECTED = 20;
     private static final int UART_PROFILE_DISCONNECTED = 21;
+
     private static final String SOCIALON = "soci 1.0";
     public static final String TAG = "BEACON";
 
@@ -42,7 +42,6 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.main);
 
         WebView webview = (WebView) findViewById(R.id.webview);
@@ -50,17 +49,18 @@ public class MainActivity extends Activity {
         webSettings.setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient());
         webview.addJavascriptInterface(this, "Android");
-        webview.loadUrl("http://blitzkrieg-pulse.herokuapp.com/home");
+        webview.loadUrl("http://blitzkrieg-pulse.herokuapp.com");
 
         setupBluetooth();
         serviceInit();
+        connectToBeacon();
     }
 
     private void setupBluetooth() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+            mBluetoothAdapter.enable();
+            showMessage("Bluetooth has been enabled");
         }
     }
 
@@ -89,11 +89,6 @@ public class MainActivity extends Activity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-    }
-
-    @JavascriptInterface
-    public void startBeacon() {
-        connectToBeacon();
     }
 
     // UART service connection
@@ -151,18 +146,6 @@ public class MainActivity extends Activity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    public static UartService getmUartService() {
-        return mUartService;
-    }
-
-    public static String getSocialon() {
-        return SOCIALON;
-    }
-
-    public static BluetoothAdapter getmBluetoothAdapter() {
-        return mBluetoothAdapter;
-    }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -178,15 +161,6 @@ public class MainActivity extends Activity {
                     mBluetoothDevice = BluetoothAdapter.getDefaultAdapter()
                             .getRemoteDevice(deviceAddress);
                     mUartService.connect(deviceAddress);
-                }
-                break;
-
-            case REQUEST_ENABLE_BT:
-                if (resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(this, "Bluetooth has turned on", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Bluetooth could not turn on", Toast.LENGTH_SHORT).show();
-                    finish();
                 }
                 break;
 
@@ -214,8 +188,8 @@ public class MainActivity extends Activity {
     public void onResume() {
         super.onResume();
         if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+            mBluetoothAdapter.enable();
+            showMessage("Bluetooth has been enabled");
         }
     }
 
@@ -227,6 +201,10 @@ public class MainActivity extends Activity {
             startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(startMain);
             showMessage("Beacon is still running");
+        } else {
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startActivity(startMain);
         }
     }
 }

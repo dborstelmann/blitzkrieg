@@ -51,7 +51,6 @@ import java.util.Map;
 public class DeviceListActivity extends Activity {
     private BluetoothAdapter mBluetoothAdapter;
 
-    // private BluetoothAdapter mBtAdapter;
     private TextView mEmptyList;
     public static final String TAG = "DeviceListActivity";
 
@@ -177,9 +176,11 @@ public class DeviceListActivity extends Activity {
         devRssiValues.put(device.getAddress(), rssi);
 
         if (!deviceFound) {
-            deviceList.add(device);
-            mEmptyList.setVisibility(View.GONE);
-            deviceAdapter.notifyDataSetChanged();
+            if (device.getName() != null && device.getName().startsWith("Beacon")) {
+                deviceList.add(device);
+                mEmptyList.setVisibility(View.GONE);
+                deviceAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -279,7 +280,7 @@ public class DeviceListActivity extends Activity {
             tvname.setText(device.getName());
             tvadd.setText(device.getAddress());
             if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
-                Log.i(TAG, "device::"+device.getName());
+                Log.i(TAG, "device::" + device.getName());
                 tvname.setTextColor(Color.WHITE);
                 tvadd.setTextColor(Color.WHITE);
                 tvpaired.setTextColor(Color.GRAY);
