@@ -7,15 +7,23 @@ var HomeView = Backbone.View.extend({
         this.render();
 
         this.pulse = false;
+        this.rando = false;
+
     },
 
     render: function() {
         this.$el.html(this.template());
 
         var $insta = this.$el.find('.instagram-div'),
-            pos = $(window).height() - $insta.position().top + $insta.outerHeight() - 164;
+            pos = $(window).height() - $insta.position().top + $insta.outerHeight() - 184;
 
         this.$el.find('#start-beacon-button').css({'margin-top': pos});
+        this.$el.find('.test-outer').css({width: this.$el.find('.outer-div').width() - 40});
+        this.$el.find('.back-div').css({
+            'pointer-events': 'none',
+            opacity: 0
+        });
+
     },
 
     events: {
@@ -24,9 +32,8 @@ var HomeView = Backbone.View.extend({
         'click #twitter-button': 'twitterLogin',
         'click #twitter-log-out': 'logOutTwitter',
         'click .start-beacon': 'startBeacon',
-        'click .stop-beacon': 'stopBeacon',
         'click .start-random-beacon': 'startRandomBeacon',
-        'click .stop-random-beacon': 'stopRandomBeacon',
+        'click #lights-button': 'stopBeacon',
         'click .branding-img': 'clickBeacon'
     },
 
@@ -63,32 +70,111 @@ var HomeView = Backbone.View.extend({
         });
     },
 
-    startBeacon: function (e) {
+    startBeacon: function () {
         this.pulse = true;
 
-        var $this = $(e.target);
-
-        $this.removeClass('start-beacon');
-        $this.addClass('red darken-2');
-        $this.addClass('stop-beacon');
-        $this.text('Stop Beacon');
+        this.$el.find('.facebook-div').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.twitter-div').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.instagram-div').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.start-beacon-outer').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.back-div').animate({
+            opacity: 1
+        }, 500);
+        this.$el.find('.back-div').css({
+            'pointer-events': 'all'
+        });
 
         this.beacon();
         this.beaconInterval = setInterval(this.beacon, 15000);
     },
 
-    stopBeacon: function (e) {
+    startRandomBeacon: function () {
+        this.pulse = true;
+        this.rando = true;
+
+        this.$el.find('.facebook-div').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.twitter-div').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.instagram-div').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.start-beacon-outer').animate({
+            'pointer-events': 'none',
+            opacity: 0
+        }, 500);
+        this.$el.find('.back-div').animate({
+            'pointer-events': 'all',
+            opacity: 1
+        }, 500);
+        this.$el.find('.back-div').css({
+            'pointer-events': 'all'
+        });
+
+        this.randomBeacon();
+        this.randomBeaconInterval = setInterval(this.randomBeacon, 15000);
+    },
+
+    stopBeacon: function () {
+        if (this.rando) {
+            clearInterval(this.randomBeaconInterval);
+        } else {
+            clearInterval(this.beaconInterval);
+        }
+
+        this.$el.find('.facebook-div').animate({
+            'pointer-events': 'all',
+            opacity: 1
+        }, 500);
+        this.$el.find('.twitter-div').animate({
+            'pointer-events': 'all',
+            opacity: 1
+        }, 500);
+        this.$el.find('.instagram-div').animate({
+            'pointer-events': 'all',
+            opacity: 1
+        }, 500);
+        this.$el.find('.start-beacon-outer').animate({
+            'pointer-events': 'all',
+            opacity: 1
+        }, 500);
+        this.$el.find('.back-div').animate({
+            opacity: 0
+        }, 500);
+        this.$el.find('.back-div').css({
+            'pointer-events': 'none'
+        });
+
         this.pulse = false;
+        this.rando = false;
 
-        var $this = $(e.target);
+    },
 
-
-        clearInterval(this.beaconInterval);
-
-        $this.removeClass('stop-beacon');
-        $this.removeClass('red darken-2');
-        $this.addClass('start-beacon');
-        $this.text('Start Beacon');
+    clickBeacon: function () {
+        if (typeof Android !== 'undefined') {
+            Android.notifyMe();
+        }
+        $('#testing-beacon').toggleClass('black');
+        setTimeout( function () {
+            $('#testing-beacon').toggleClass('black');
+        }, 500);
     },
 
     beacon: function () {
@@ -111,34 +197,6 @@ var HomeView = Backbone.View.extend({
                 });
             }
         });
-    },
-
-    startRandomBeacon: function (e) {
-        this.pulse = True;
-
-        var $this = $(e.target);
-
-        $this.removeClass('start-random-beacon');
-        $this.addClass('red darken-2');
-        $this.addClass('stop-random-beacon');
-        $this.text('Stop Random Beacon');
-
-        this.randomBeacon();
-        this.randomBeaconInterval = setInterval(this.randomBeacon, 15000);
-    },
-
-    stopRandomBeacon: function (e) {
-        this.pulse = false;
-
-        var $this = $(e.target);
-
-
-        clearInterval(this.randomBeaconInterval);
-
-        $this.removeClass('stop-random-beacon');
-        $this.removeClass('red darken-2');
-        $this.addClass('start-random-beacon');
-        $this.text('Start Random Beacon');
     },
 
     randomBeacon: function () {
@@ -187,16 +245,6 @@ var HomeView = Backbone.View.extend({
                 $('#testing-beacon').toggleClass('black');
             }, 500);
         }, Math.random() * 15000);
-    },
-
-    clickBeacon: function () {
-        if (typeof Android !== 'undefined') {
-            Android.notifyMe();
-        }
-        $('#testing-beacon').toggleClass('black');
-        setTimeout( function () {
-            $('#testing-beacon').toggleClass('black');
-        }, 500);
     }
 
 });
