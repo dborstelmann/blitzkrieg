@@ -20,33 +20,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#666" >
-
-        <TextView
-            android:id="@+id/title_devices"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:paddingLeft="12dp"
-            android:paddingRight="50dp"
-            android:text="@string/select_device"
-            android:textColor="#fff"
-            android:textSize="15dip" />
-
-        <ImageView
-            android:id="@+id/about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_info_details" />
-    </RelativeLayout>
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
+
         <ListView
             android:id="@+id/new_devices"
             android:layout_width="fill_parent"
@@ -56,8 +33,8 @@
 
         <TextView
             android:id="@+id/empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:text="@string/scanning" />
 
         <Button
@@ -65,5 +42,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@android:string/cancel" />
+
     </LinearLayout>
 </LinearLayout>
