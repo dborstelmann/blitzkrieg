@@ -5,10 +5,17 @@ var HomeView = Backbone.View.extend({
     initialize: function() {
         this.template = _.template($('#home-template').text());
         this.render();
+
+        this.pulse = false;
     },
 
     render: function() {
         this.$el.html(this.template());
+
+        var $insta = this.$el.find('.instagram-div'),
+            pos = $(window).height() - $insta.position().top + $insta.outerHeight() - 164;
+
+        this.$el.find('#start-beacon-button').css({'margin-top': pos});
     },
 
     events: {
@@ -20,7 +27,7 @@ var HomeView = Backbone.View.extend({
         'click .stop-beacon': 'stopBeacon',
         'click .start-random-beacon': 'startRandomBeacon',
         'click .stop-random-beacon': 'stopRandomBeacon',
-        'click #on-click-beacon': 'clickBeacon'
+        'click .branding-img': 'clickBeacon'
     },
 
     logOut: function () {
@@ -57,6 +64,8 @@ var HomeView = Backbone.View.extend({
     },
 
     startBeacon: function (e) {
+        this.pulse = true;
+
         var $this = $(e.target);
 
         $this.removeClass('start-beacon');
@@ -69,6 +78,8 @@ var HomeView = Backbone.View.extend({
     },
 
     stopBeacon: function (e) {
+        this.pulse = false;
+
         var $this = $(e.target);
 
 
@@ -103,6 +114,8 @@ var HomeView = Backbone.View.extend({
     },
 
     startRandomBeacon: function (e) {
+        this.pulse = True;
+
         var $this = $(e.target);
 
         $this.removeClass('start-random-beacon');
@@ -115,6 +128,8 @@ var HomeView = Backbone.View.extend({
     },
 
     stopRandomBeacon: function (e) {
+        this.pulse = false;
+
         var $this = $(e.target);
 
 

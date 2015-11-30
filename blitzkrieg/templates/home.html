@@ -12,58 +12,90 @@
 
 <script id="home-template" type="text/template">
     <div class="container">
-        <div class="section log-in-section">
-            <div class="row">
-                <div class="col s12 l8 offset-l2">
-                    <div class="row">
-                        <div class="col s12 l9 branding">
-                            <h4>Welcome to Blitzkrieg</h4>
+        <div class="section no-bot-pads">
+            <div class="row no-bot-marg">
+                <div class="col s12 l4 offset-l4">
+                    <div class="row outer-div no-bot-marg">
+
+                        <div class="col s12 header-div">
+                            <div class="row some-bot-marg">
+                                <div class="col s2 back-div top-spread">
+                                    <span id="lights-button" class="lights-button">
+                                        <i class="material-icons right my-blue">backspace</i>
+                                    </span>
+                                </div>
+                                <div class="col s8 branding">
+                                    <div class="row no-bot-marg">
+                                        <div class="col s6 offset-s3">
+                                            <img class="branding-img" src="static/img/beacon.png">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s2 log-out top-spread">
+                                    <span id="log-out-button" class="log-out-button">
+                                        <i class="material-icons right my-blue">exit_to_app</i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s12 l3 log-out top-spread">
-                            <button id="log-out-button" class="btn waves-effect waves-light">Log Out
-                                <i class="material-icons right">send</i>
-                            </button>
+
+                        <div class="col s12">
+                            <div class="row no-bot-marg valign-wrapper pads facebook-div">
+                                <div class="col s2 center-align">
+                                    <img class="social-icons valign" src="static/img/facebook.png">
+                                </div>
+                                <div class="col s6 valign grey-text text-darken-2">
+                                    Facebook
+                                </div>
+                                <div class="col s4 center-align valign">
+                                    <a id="random-beacon" class="my-blue connect-button random-beacon start-random-beacon">Connect</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s12 l6 top-spread">
-                            {% if session.twitter_token %}
-                            <a id="twitter-log-out" class="btn custom-buttons tall-buttons red darken-2">
-                                Log Out of Twitter
-                            </a>
-                            {% else %}
-                            <a id="twitter-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
-                                Log In With Twitter
-                            </a>
-                            {% endif %}
+                        <div class="col s12">
+                            <div class="row no-bot-marg valign-wrapper pads twitter-div">
+                                <div class="col s2 center-align">
+                                    <img class="social-icons valign" src="static/img/twitter.png">
+                                </div>
+                                <div class="col s6 valign grey-text text-darken-2">
+                                    Twitter
+                                </div>
+                                <div class="col s4 center-align valign">
+                                    {% if session.twitter_token %}
+                                    <a id="twitter-log-out" class="my-back-blue connect-button">Disconnect</a>
+                                    {% else %}
+                                    <a id="twitter-button" class="my-blue connect-button">Connect</a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s12 l6 top-spread">
-                            {% if session.instagram_token %}
-                            <a id="instagram-log-out" class="btn custom-buttons tall-buttons red darken-2">
-                                Log Out of Instagram
-                            </a>
-                            {% else %}
-                            <a href="https://instagram.com/oauth/authorize/?client_id=e7896c47f26e463ba097362492257dd7&redirect_uri=https://blitzkrieg.ngrok.io/instagram_redirect&response_type=code" id="instagram-button" class="btn waves-effect waves-light custom-buttons tall-buttons">
-                                Log In With Instagram
-                            </a>
-                            {% endif %}
+                        <div class="col s12">
+                            <div class="row some-bot-marg valign-wrapper pads instagram-div">
+                                <div class="col s2 center-align">
+                                    <img class="social-icons valign" src="static/img/instagram.png">
+                                </div>
+                                <div class="col s6 valign grey-text text-darken-2">
+                                    Instagram
+                                </div>
+                                <div class="col s4 center-align valign">
+                                    {% if session.instagram_token %}
+                                    <a id="instagram-log-out" class="my-back-blue connect-button">Disconnect</a>
+                                    {% else %}
+                                    <a id="instagram-button" class="my-blue connect-button" href="https://instagram.com/oauth/authorize/?client_id=e7896c47f26e463ba097362492257dd7&redirect_uri=https://blitzkrieg.ngrok.io/instagram_redirect&response_type=code">
+                                        Connect
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s12 l6 top-spread">
-                            <a id="start-beacon-button" class="btn waves-effect waves-light custom-buttons tall-buttons start-beacon">
+                        <div class="col s12">
+                            <a id="start-beacon-button" class="my-back-blue start-beacon center-align">
                                 Start Beacon
                             </a>
                         </div>
-                        <div class="col s12 l6 top-spread">
+                        <div class="col s12">
                             <a id="testing-beacon" class="btn waves-effect waves-light custom-buttons tall-buttons testing-beacon">
                                 Testing Beacon
-                            </a>
-                        </div>
-                        <div class="col s12 l6 top-spread">
-                            <a id="on-click-beacon" class="btn waves-effect waves-light custom-buttons tall-buttons on-click-beacon">
-                                Click to Flash
-                            </a>
-                        </div>
-                        <div class="col s12 l6 top-spread">
-                            <a id="random-beacon" class="btn waves-effect waves-light custom-buttons tall-buttons random-beacon start-random-beacon">
-                                Click to Start Random Beacon
                             </a>
                         </div>
                     </div>
