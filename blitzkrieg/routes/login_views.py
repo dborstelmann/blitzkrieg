@@ -6,7 +6,7 @@ import requests, psycopg2
 INSTAGRAM_CONFIG = {
     'client_id': 'e7896c47f26e463ba097362492257dd7',
     'client_secret': '2db4eb3d197e4feea21505aa2a1dcf50',
-    'redirect_uri': 'https://blitzkrieg-pulse.herokuapp.com/instagram_redirect',
+    'redirect_uri': 'https://www.bringhomethebeacon.io/instagram_redirect',
     'redirect_uri_local': 'https://blitzkrieg.ngrok.io/instagram_redirect'
 }
 
