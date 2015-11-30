@@ -19,6 +19,21 @@ CREATE TABLE instagram_user (
     "access_token" text NOT NULL
 );
 
+CREATE TABLE twitter_user (
+    "id" varchar(50) PRIMARY KEY,
+    "user_id" serial NOT NULL,
+    "screen_name" text NOT NULL,
+    "access_token" text NOT NULL,
+    "access_token_secret" text NOT NULL
+);
+
 CREATE TABLE single_day_instagram (
     "created_datetime" text PRIMARY KEY
+)
+
+CREATE TABLE feed_data (
+    "id" serial PRIMARY KEY,
+    "created_datetime" text NOT NULL,
+    "user_id" serial NOT NULL,
+    "api_service" text
 )

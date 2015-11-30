@@ -12,10 +12,24 @@ var HomeView = Backbone.View.extend({
     },
 
     events: {
+        'touchstart #log-out-button': 'logOut',
+        'touchstart #instagram-log-out': 'logOutInstagram',
+        'touchstart #twitter-button': 'twitterLogin',
+        'touchstart #twitter-log-out': 'logOutTwitter',
+        'touchstart .start-beacon': 'startBeacon',
+        'touchstart .stop-beacon': 'stopBeacon',
+        'touchstart .start-random-beacon': 'startRandomBeacon',
+        'touchstart .stop-random-beacon': 'stopRandomBeacon',
+        'touchstart #on-click-beacon': 'clickBeacon',
         'click #log-out-button': 'logOut',
         'click #instagram-log-out': 'logOutInstagram',
-        'click #get-instagram-feed': 'getInstagramFeed',
-        'click #test-android-button': 'testAndroid'
+        'click #twitter-button': 'twitterLogin',
+        'click #twitter-log-out': 'logOutTwitter',
+        'click .start-beacon': 'startBeacon',
+        'click .stop-beacon': 'stopBeacon',
+        'click .start-random-beacon': 'startRandomBeacon',
+        'click .stop-random-beacon': 'stopRandomBeacon',
+        'click #on-click-beacon': 'clickBeacon'
     },
 
     logOut: function () {
@@ -37,18 +51,146 @@ var HomeView = Backbone.View.extend({
         });
     },
 
-    getInstagramFeed: function () {
+    twitterLogin: function () {
+        window.location.href = 'twitter_login';
+    },
+
+    logOutTwitter: function () {
         $.ajax({
-            type: 'GET',
-            url: 'get_instagram_feed',
+            type: 'POST',
+            url: 'twitter_log_out',
             success: function () {
+                window.location.reload();
             }
         });
     },
 
-    testAndroid: function () {
-        $('#test-android-button').css({'background-color': 'red'});
-        Android.showToast('TESTTTTTTTT');
+    startBeacon: function (e) {
+        var $this = $(e.target);
+
+        $this.removeClass('start-beacon');
+        $this.addClass('red darken-2');
+        $this.addClass('stop-beacon');
+        $this.text('Stop Beacon');
+
+        this.beacon();
+        this.beaconInterval = setInterval(this.beacon, 15000);
+    },
+
+    stopBeacon: function (e) {
+        var $this = $(e.target);
+
+
+        clearInterval(this.beaconInterval);
+
+        $this.removeClass('stop-beacon');
+        $this.removeClass('red darken-2');
+        $this.addClass('start-beacon');
+        $this.text('Start Beacon');
+    },
+
+    beacon: function () {
+        $.ajax({
+            url: 'ping_user_data',
+            success: function (data) {
+                _.each(data, function (ping) {
+                    var nowDate = new Date(),
+                        pingDate = new Date(ping);
+
+                    setTimeout( function () {
+                        if (typeof Android !== 'undefined') {
+                            Android.notifyMe();
+                        }
+                        $('#testing-beacon').toggleClass('black');
+                        setTimeout( function () {
+                            $('#testing-beacon').toggleClass('black');
+                        }, 500);
+                    }, pingDate - nowDate);
+                });
+            }
+        });
+    },
+
+    startRandomBeacon: function (e) {
+        var $this = $(e.target);
+
+        $this.removeClass('start-random-beacon');
+        $this.addClass('red darken-2');
+        $this.addClass('stop-random-beacon');
+        $this.text('Stop Random Beacon');
+
+        this.randomBeacon();
+        this.randomBeaconInterval = setInterval(this.randomBeacon, 15000);
+    },
+
+    stopRandomBeacon: function (e) {
+        var $this = $(e.target);
+
+
+        clearInterval(this.randomBeaconInterval);
+
+        $this.removeClass('stop-random-beacon');
+        $this.removeClass('red darken-2');
+        $this.addClass('start-random-beacon');
+        $this.text('Start Random Beacon');
+    },
+
+    randomBeacon: function () {
+        setTimeout( function () {
+            if (typeof Android !== 'undefined') {
+                Android.notifyMe();
+            }
+            $('#testing-beacon').toggleClass('black');
+            setTimeout( function () {
+                $('#testing-beacon').toggleClass('black');
+            }, 500);
+        }, Math.random() * 5000);
+        setTimeout( function () {
+            if (typeof Android !== 'undefined') {
+                Android.notifyMe();
+            }
+            $('#testing-beacon').toggleClass('black');
+            setTimeout( function () {
+                $('#testing-beacon').toggleClass('black');
+            }, 500);
+        }, Math.random() * 10000);
+        setTimeout( function () {
+            if (typeof Android !== 'undefined') {
+                Android.notifyMe();
+            }
+            $('#testing-beacon').toggleClass('black');
+            setTimeout( function () {
+                $('#testing-beacon').toggleClass('black');
+            }, 500);
+        }, Math.random() * 15000);
+        setTimeout( function () {
+            if (typeof Android !== 'undefined') {
+                Android.notifyMe();
+            }
+            $('#testing-beacon').toggleClass('black');
+            setTimeout( function () {
+                $('#testing-beacon').toggleClass('black');
+            }, 500);
+        }, Math.random() * 15000);
+        setTimeout( function () {
+            if (typeof Android !== 'undefined') {
+                Android.notifyMe();
+            }
+            $('#testing-beacon').toggleClass('black');
+            setTimeout( function () {
+                $('#testing-beacon').toggleClass('black');
+            }, 500);
+        }, Math.random() * 15000);
+    },
+
+    clickBeacon: function () {
+        if (typeof Android !== 'undefined') {
+            Android.notifyMe();
+        }
+        $('#testing-beacon').toggleClass('black');
+        setTimeout( function () {
+            $('#testing-beacon').toggleClass('black');
+        }, 500);
     }
 
 });

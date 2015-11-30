@@ -12,7 +12,7 @@ def get_instagram_feed():
 
     # when doing this change timedelta to days=1
     # print(len(final_feed))
-    # cur.executemany("""INSERT INTO single_day_instagram (created_datetime) VALUES (%s)""", final_feed)
+    cur.executemany("""INSERT INTO feed_data (created_datetime) VALUES (%s)""", final_feed)
     # print('done')
 
     cur.close()
@@ -33,11 +33,11 @@ def recursive_results(data_feed, next_url=None):
 
     for point in result['data']:
         created_date = datetime.datetime.fromtimestamp(int(point['created_time']))
-        if created_date < datetime.datetime.now()-datetime.timedelta(minutes=10):
+        if created_date < datetime.datetime.now() - datetime.timedelta(minutes=10):
             break_check = True
             break
         else:
-            data_feed.append((str(created_date),))
+            data_feed.append((str(created_date + datetime.timedelta(minutes=10)),))
 
     if break_check:
         return data_feed
