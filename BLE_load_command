@@ -1,0 +1,1 @@
+sudo mount -u -w -o sync /Volumes/MBED ; cp -X ~/Downloads/program.hex /Volumes/MBED/
