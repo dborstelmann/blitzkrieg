@@ -12,15 +12,6 @@ var HomeView = Backbone.View.extend({
     },
 
     events: {
-        'touchstart #log-out-button': 'logOut',
-        'touchstart #instagram-log-out': 'logOutInstagram',
-        'touchstart #twitter-button': 'twitterLogin',
-        'touchstart #twitter-log-out': 'logOutTwitter',
-        'touchstart .start-beacon': 'startBeacon',
-        'touchstart .stop-beacon': 'stopBeacon',
-        'touchstart .start-random-beacon': 'startRandomBeacon',
-        'touchstart .stop-random-beacon': 'stopRandomBeacon',
-        'touchstart #on-click-beacon': 'clickBeacon',
         'click #log-out-button': 'logOut',
         'click #instagram-log-out': 'logOutInstagram',
         'click #twitter-button': 'twitterLogin',
