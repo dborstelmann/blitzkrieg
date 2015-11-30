@@ -20,7 +20,16 @@ var HomeView = Backbone.View.extend({
         'touchstart .stop-beacon': 'stopBeacon',
         'touchstart .start-random-beacon': 'startRandomBeacon',
         'touchstart .stop-random-beacon': 'stopRandomBeacon',
-        'touchstart #on-click-beacon': 'clickBeacon'
+        'touchstart #on-click-beacon': 'clickBeacon',
+        'click #log-out-button': 'logOut',
+        'click #instagram-log-out': 'logOutInstagram',
+        'click #twitter-button': 'twitterLogin',
+        'click #twitter-log-out': 'logOutTwitter',
+        'click .start-beacon': 'startBeacon',
+        'click .stop-beacon': 'stopBeacon',
+        'click .start-random-beacon': 'startRandomBeacon',
+        'click .stop-random-beacon': 'stopRandomBeacon',
+        'click #on-click-beacon': 'clickBeacon'
     },
 
     logOut: function () {
