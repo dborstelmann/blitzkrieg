@@ -7,10 +7,181 @@
 <link type="text/css" rel="stylesheet/less" href="static/less/styles.less"/>
 <script src="static/js/less.min.js" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<title>Blitzkrieg</title>
+<title>Beacon</title>
 
 <script id="hello-template" type="text/template">
+    <div class="container">
+        <div class="section no-bot-pads">
+            <div class="row no-bot-marg">
+                <div class="col s12 l4 offset-l4">
+                    <div class="row outer-div no-bot-marg">
+
+                        <div class="col s12 header-div">
+                            <div class="row some-bot-marg">
+                                <div class="col s12 branding">
+                                    <div class="row no-bot-marg">
+                                        <div class="col s6 offset-s3">
+                                            <img class="branding-img" src="static/img/white-beacon.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12 wordz">
+                            <div class="row">
+                                <div class="col s12 first-wordz white-text center-align">
+                                    <span class="boldz">Beacon</span> illuminates every time there is activity on your social media networks.
+                                </div>
+                                <div class="col s12 second-wordz white-text center-align">
+                                    <em class="boldz">Bask in your social media aura.</em>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12 buttz">
+                            <div class="row">
+                                <div class="col s12 new-sign-up">
+                                    <a id="new-sign-up-button" class="new-sign-up-button center-align buttzz">
+                                        Sign Up
+                                    </a>
+                                </div>
+                                <div class="col s12 new-log-in">
+                                    <a id="new-log-in-button" class="new-log-in-button center-align buttzz">
+                                        Log In
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="log-in-template" type="text/template">
+    <div class="container">
+        <div class="section no-bot-pads">
+            <div class="row no-bot-marg">
+                <div class="col s12 l4 offset-l4">
+                    <div class="row outer-div no-bot-marg">
+
+                        <div class="col s12 header-div">
+                            <div class="row some-bot-marg">
+                                <div class="col s12 branding">
+                                    <div class="row no-bot-marg">
+                                        <div class="col s6 offset-s3">
+                                            <img class="branding-img" src="static/img/white-beacon.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12 buttzzz">
+                            <div class="row">
+                                <div class="col s12 new-log-in">
+                                    <a id="log-in-button" class="new-log-in-button center-align buttzz">
+                                        Log In
+                                    </a>
+                                </div>
+
+                                <div class="col s12">
+                                    <a class="center-align back-home">
+                                        < Back
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="register-template" type="text/template">
+    <div class="container">
+        <div class="section no-bot-pads">
+            <div class="row no-bot-marg">
+                <div class="col s12 l4 offset-l4">
+                    <div class="row outer-div no-bot-marg">
+
+                        <div class="col s12 header-div">
+                            <div class="row some-bot-marg">
+                                <div class="col s12 branding">
+                                    <div class="row no-bot-marg">
+                                        <div class="col s6 offset-s3">
+                                            <img class="branding-img" src="static/img/white-beacon.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="first-name" type="text" class="validate">
+                                    <label for="first-name">First Name</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="last-name" type="text" class="validate">
+                                    <label for="last-name">Last Name</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12 buttzzz">
+                            <div class="row">
+                                <div class="col s12 new-sign-up">
+                                    <a id="register-button" class="new-sign-up-button center-align buttzz">
+                                        Register
+                                    </a>
+                                </div>
+
+                                <div class="col s12">
+                                    <a class="center-align back-home">
+                                        < Back
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="old-hello-template" type="text/template">
     <div class="container">
         <div class="section log-in-section">
             <div class="row">
@@ -19,34 +190,8 @@
                         <div class="branding">
                             <h4>Welcome to Blitzkrieg</h4>
                         </div>
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12 l6">
-                                    <input id="email" type="email" class="validate">
-                                    <label for="email">Email</label>
-                                </div>
-                                <div class="input-field col s12 l6">
-                                    <input id="password" type="password" class="validate">
-                                    <label for="password">Password</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 l4 offset-l8">
-                                    <button id="log-in-button" class="btn waves-effect waves-light custom-buttons">Log In
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12 l6">
-                                    <input id="first-name" type="text" class="validate">
-                                    <label for="first-name">First Name</label>
-                                </div>
-                                <div class="input-field col s12 l6">
-                                    <input id="last-name" type="text" class="validate">
-                                    <label for="last-name">Last Name</label>
-                                </div>
-                            </div>
+
+
                             <div class="row">
                                 <div class="col s12 l4 offset-l8">
                                     <button id="register-button" class="btn waves-effect waves-light custom-buttons">Register

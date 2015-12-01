@@ -3,17 +3,65 @@ var HelloView = Backbone.View.extend({
     el: '#hello',
 
     initialize: function() {
-        this.template = _.template($('#hello-template').text());
+        this.helloTemplate = _.template($('#hello-template').text());
+        this.logTemplate = _.template($('#log-in-template').text());
+        this.signTemplate = _.template($('#register-template').text());
+        this.template = this.helloTemplate;
+
         this.render();
     },
 
     render: function() {
         this.$el.html(this.template());
+
+        this.$el.find('.buttz').css({top: $(window).height() - 140});
+        this.$el.find('.outer-div').css({height: $(window).height() - 15});
+        this.$el.find('.buttz').css({
+            width: this.$el.find('.outer-div').width()
+        });
+    },
+
+    logRender: function() {
+        this.$el.html(this.template());
+
+        this.$el.find('.buttzzz').css({top: $(window).height() - 180});
+        this.$el.find('.outer-div').css({height: $(window).height() - 15});
+        this.$el.find('.buttzzz').css({
+            width: this.$el.find('.outer-div').width()
+        });
+    },
+
+    signRender: function() {
+        this.$el.html(this.template());
+
+        this.$el.find('.buttzzz').css({top: $(window).height() - 180});
+        this.$el.find('.outer-div').css({height: $(window).height() - 15});
+        this.$el.find('.buttzzz').css({
+            width: this.$el.find('.outer-div').width()
+        });
     },
 
     events: {
         "click #log-in-button": "logIn",
-        "click #register-button": "register"
+        "click #register-button": "register",
+        "click .new-log-in-button": "moveLog",
+        "click .new-sign-up-button": "newSign",
+        "click .back-home": "goBack"
+    },
+
+    goBack: function () {
+        this.template = this.helloTemplate;
+        this.render();
+    },
+
+    moveLog: function () {
+        this.template = this.logTemplate;
+        this.logRender();
+    },
+
+    newSign: function () {
+        this.template = this.signTemplate;
+        this.signRender();
     },
 
     logIn: function () {

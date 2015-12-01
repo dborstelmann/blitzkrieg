@@ -1,15 +1,84 @@
-#hello {
-    height: 100%;
+/* label color */
+ .input-field label {
+   color: #fff;
+ }
+ .input-field {
+   color: #fff;
+ }
+ .input-field input[type=email] {
+   border-bottom: 1px solid #fff;
+ }
+ .input-field input[type=password] {
+   border-bottom: 1px solid #fff;
+ }
+ /* label focus color */
+ .input-field input[type=email]:focus + label {
+   color: #fff;
+ }
+ /* label underline focus color */
+ .input-field input[type=email]:focus {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* valid color */
+ .input-field input[type=email].valid {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* invalid color */
+ .input-field input[type=email].invalid {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* label focus color */
+ .input-field input[type=password]:focus + label {
+   color: #fff;
+ }
+ /* label underline focus color */
+ .input-field input[type=password]:focus {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* valid color */
+ .input-field input[type=password].valid {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* invalid color */
+ .input-field input[type=password].invalid {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* icon prefix focus color */
+ .input-field .prefix.active {
+   color: #fff;
+ }
+ .input-field input[type=text] {
+   border-bottom: 1px solid #fff;
+ }
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+   color: #fff;
+ }
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* valid color */
+ .input-field input[type=text].valid {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
+ /* invalid color */
+ .input-field input[type=text].invalid {
+   border-bottom: 1px solid #fff;
+   box-shadow: 0 1px 0 0 #fff;
+ }
 
-    .log-in-section {
-        margin-top: 15%;
-        margin-bottom: 15%;
 
 
 
-    }
-
-}
 
 .custom-buttons {
     width: 100%;
@@ -17,6 +86,125 @@
 
 .tall-buttons {
     height: 70px;
+}
+
+.outer-div {
+    border: 2px solid #0C88C0;
+    border-radius: 4px;
+}
+
+.branding-img {
+    width: 100%;
+    margin-top: 20%;
+    cursor: pointer;
+}
+
+.some-bot-marg {
+    margin-bottom: 10px;
+}
+
+.no-bot-marg {
+    margin-bottom: 0;
+}
+
+.top-spread {
+    margin-top: 20px;
+}
+
+.pads {
+    border-top: 1px solid #eee;
+    padding-top: 4px;
+}
+
+.no-bot-pads {
+    padding-bottom: 0;
+}
+
+.my-blue {
+    color: #0C88C0;
+}
+
+.my-back-blue {
+    background-color: #0C88C0;
+    color: white;
+}
+
+#hello {
+
+    .buttz {
+        position: absolute;
+    }
+
+    .wordz {
+        font-size: 18px;
+        margin-top: 40px;
+        font-weight: lighter;
+    }
+
+    .boldz {
+        font-weight: normal;
+    }
+
+    .new-sign-up {
+        cursor: pointer;
+    }
+
+    .new-log-in {
+        cursor: pointer;
+    }
+
+    .second-wordz {
+        margin-top: 30px;
+    }
+
+    @media screen and (min-width: 700px) {
+        background-image: linear-gradient(#3FBBF3, #0C88C0);
+    }
+
+    .outer-div {
+        border: none;
+        background-image: linear-gradient(#3FBBF3, #0C88C0);
+    }
+
+    .buttzz {
+        height: 40px;
+        display: block;
+        border-radius: 2px;
+        font-size: 18px;
+        padding-top: 6px;
+    }
+
+    .back-home {
+        height: 40px;
+        display: block;
+        font-size: 18px;
+        padding-top: 6px;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .new-sign-up-button {
+        background-color: white;
+        color: #0C88C0;
+        margin-bottom: 10px;
+    }
+
+    .new-log-in-button {
+        color: #fff;
+        border: 1px solid #fff;
+    }
+
+    .branding-img {
+        margin-top: 150px;
+    }
+
+    .branding {
+        .branding-img {
+            margin-top: 50px;
+        }
+    }
+
 }
 
 #home {
@@ -29,36 +217,8 @@
         background-image: radial-gradient(#0C88C0, #fff, #fff);
     }
 
-    .outer-div {
-        border: 2px solid #0C88C0;
-        border-radius: 4px;
-    }
-
-    .branding-img {
-        width: 100%;
-        margin-top: 20%;
-        cursor: pointer;
-    }
-
     .social-icons {
         width: 100%;
-    }
-
-    .some-bot-marg {
-        margin-bottom: 10px;
-    }
-
-    .no-bot-marg {
-        margin-bottom: 0;
-    }
-
-    .top-spread {
-        margin-top: 20px;
-    }
-
-    .pads {
-        border-top: 1px solid #eee;
-        padding-top: 4px;
     }
 
     .facebook-div {
@@ -77,15 +237,6 @@
 
     #lights-button {
         cursor: pointer;
-    }
-
-    .my-blue {
-        color: #0C88C0;
-    }
-
-    .my-back-blue {
-        background-color: #0C88C0;
-        color: white;
     }
 
     .connect-button {
@@ -107,7 +258,4 @@
         margin-bottom: 10px;
     }
 
-    .no-bot-pads {
-        padding-bottom: 0;
-    }
 }
