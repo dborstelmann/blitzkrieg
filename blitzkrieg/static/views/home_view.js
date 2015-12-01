@@ -19,8 +19,8 @@ var HomeView = Backbone.View.extend({
 
         this.$el.find('#start-beacon-button').css({'margin-top': pos});
         this.$el.find('#testing-beacon').css({
-            width: this.$el.find('.outer-div').width() - 40,
-            height: this.$el.find('.outer-div').width() - 40,
+            width: this.$el.find('.outer-div').width() + 1600,
+            height: this.$el.find('.outer-div').width() + 1600,
             opacity: 0
         });
         this.$el.find('.back-div').css({
